@@ -24,12 +24,10 @@ group :development, :test do
   gem 'pry-rails'             # pry利用
   gem 'pry-byebug'            # pryでデバッグコマンドが可能
   gem 'hirb'                  # SQLの結果を整形
-  gem 'erb2haml'              # .erbを.hamlに変換
-  gem 'rails-erd'             # モデルのER図を出力
-  gem 'rails_best_practices'  # ベストプラクティスのチェック
-
+  # gem 'erb2haml'              # .erbを.hamlに変換
+  # gem 'rails-erd'             # モデルのER図を出力
+  # gem 'rails_best_practices'  # ベストプラクティスのチェック
   gem 'rspec-rails'
-  # gem 'rspec-request_describer'
   gem 'factory_girl_rails'
 end
 
