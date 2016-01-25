@@ -1,0 +1,39 @@
+image: ruby:2.3
+
+# services:
+#   - mysql:latest
+
+# variables:
+#   MYSQL_ALLOW_EMPTY_PASSWORD: "1"
+
+before_script:
+  - source ./scripts/prepare_build.sh
+  - ruby -v
+  - which ruby
+  - gem install bundler --no-ri --no-rdoc
+  - bundle install --path vendor/bundle
+  - RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load db:migrate
+
+spec:controllers:
+  script:
+    - RAILS_ENV=test bundle exec rake spec:controllers
+  tags:
+    - ruby
+
+spec:models:
+  script:
+    - RAILS_ENV=test bundle exec rake spec:models
+  tags:
+    - ruby
+
+spec:requests:
+  script:
+    - RAILS_ENV=test bundle exec rake spec:requests
+  tags:
+    - ruby
+
+# spec:features:
+#   script:
+#     - RAILS_ENV=test bundle exec rake spec:features
+#   tags:
+#     - ruby
