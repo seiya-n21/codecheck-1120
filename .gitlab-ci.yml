@@ -37,3 +37,16 @@ spec:requests:
 #     - RAILS_ENV=test bundle exec rake spec:features
 #   tags:
 #     - ruby
+
+rubocop:
+  script:
+    - bundle exec rubocop
+  tags:
+    - ruby
+  allow_failure: true
+
+brakeman:
+  script:
+    - bundle exec brakeman
+  tags:
+    - ruby

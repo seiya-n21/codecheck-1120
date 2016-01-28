@@ -1,3 +1,5 @@
+# coding: utf-8
+
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.5'
@@ -29,6 +31,8 @@ group :development, :test do
   # gem 'rails_best_practices'  # ベストプラクティスのチェック
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'rubocop', require: false
+  gem 'brakeman', require: false
 end
 
 group :test do
