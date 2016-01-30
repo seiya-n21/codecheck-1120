@@ -46,8 +46,10 @@ function manage_mediasteam(s_roomid, s_name, s_gender, uid) {
     $("#"+peer_id).remove();
 
     // peerが切れたユーザ枠を削除
-    elem_peeruinfo = document.getElementById('peer-video-uinfo-'+ video['id']);
-    elem_peeruinfo.removeChild(child);
+    aUinfoNode = document.getElementById('peer-video-uinfo-'+ peer_id);
+    for (var i = aUinfoNode.childNodes.length-1; i>=0; i--) {
+      aUinfoNode.removeChild(aUinfoNode.childNodes[i]);
+    }
   });
 
   // Error handling:★ユーザに何を表示すべきか要検討
