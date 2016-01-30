@@ -42,7 +42,6 @@ RSpec.feature "Castings", type: :feature do
        click_button 'CAST NOW'
      }.to change(User, :count).by(1).and change(Room, :count).by(0)
   
-     binding.pry
      user = User.find_by(name: 'user04')
      expect(user.room.status).to be_truthy
   
