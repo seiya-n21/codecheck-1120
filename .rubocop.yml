@@ -6,6 +6,7 @@ AllCops:
     - 'vendor/**/*'
     - 'db/schema.rb'
     - 'bin/*'
+    - 'spec/support/shared_db_connection.rb'
   DisplayCopNames: true
 
 # サイズ制限
@@ -31,8 +32,12 @@ Style/Documentation:
   Enabled: false
 
 # クラス変数無効に
-Style/ClassVars:
-  Enabled: false
+# Style/ClassVars:
+#   Enabled: false
+
+# クラスをarentClass::ChildClass形式に
+# Style/ClassAndModuleChildren:
+#   EnforcedStyle: compact
 
 # selfの利用を許可する
 Style/RedundantSelf:
