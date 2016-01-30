@@ -70,7 +70,7 @@ class API < Grape::API
     params do
       requires :room_id, type: Integer
     end
- 	  get ':room_id' do
+    get ':room_id' do
       room = Room.find_by_id(params[:room_id])
       return { result: false } if room.nil?
       case room.status
@@ -81,7 +81,7 @@ class API < Grape::API
       else
         return { result: false }
       end
-  	end
+    end
   end
 
 end

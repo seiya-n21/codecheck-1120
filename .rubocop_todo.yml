@@ -1,0 +1,262 @@
+
+Metrics/AbcSize:
+  Max: 24
+
+Metrics/LineLength:
+  Max: 112
+
+Style/AccessModifierIndentation:
+  Enabled: false
+
+Style/AlignParameters:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Exclude:
+    - 'lib/tasks/unicorn.rake'
+    - 'spec/factories/rooms.rb'
+    - 'spec/requests/api_spec.rb'
+
+# Offense count: 2
+# Cop supports --auto-correct.
+# Style/BlockEndNewline:
+#   Exclude:
+#     - 'spec/factories/rooms.rb'
+
+# Offense count: 2
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+# SupportedStyles: braces, no_braces, context_dependent
+# Style/BracesAroundHashParameters:
+#   Exclude:
+#     - 'spec/requests/api_spec.rb'
+
+# Offense count: 1
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+# SupportedStyles: nested, compact
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'spec/support/shared_db_connection.rb'
+
+# Offense count: 1
+Style/ClassVars:
+  Exclude:
+    - 'spec/support/shared_db_connection.rb'
+
+# Offense count: 2
+# Cop supports --auto-correct.
+# Configuration parameters: SingleLineConditionsOnly.
+Style/ConditionalAssignment:
+  Exclude:
+    - 'app/controllers/rooms_controller.rb'
+    - 'app/models/room.rb'
+
+# Offense count: 15
+Style/Documentation:
+  Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
+    - 'app/apis/api.rb'
+    - 'app/controllers/application_controller.rb'
+    - 'app/controllers/rooms_controller.rb'
+    - 'app/helpers/application_helper.rb'
+    - 'app/models/match.rb'
+    - 'app/models/room.rb'
+    - 'app/models/user.rb'
+    - 'config/application.rb'
+    - 'db/migrate/20151219072703_create_rooms.rb'
+    - 'db/migrate/20151220064704_create_users.rb'
+    - 'db/migrate/20151225153553_create_matches.rb'
+    - 'db/migrate/20151227094416_add_index.rb'
+    - 'db/migrate/20151229132409_change_columns_room.rb'
+    - 'db/migrate/20160103134934_change_column_matches.rb'
+    - 'db/migrate/20160110032322_add_status_column.rb'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+Style/EmptyLines:
+  Exclude:
+    - 'spec/controllers/rooms_controller_spec.rb'
+
+# Offense count: 3
+# Cop supports --auto-correct.
+Style/EmptyLinesAroundAccessModifier:
+  Exclude:
+    - 'app/controllers/rooms_controller.rb'
+    - 'app/models/match.rb'
+    - 'app/models/user.rb'
+
+# Offense count: 11
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+# SupportedStyles: empty_lines, no_empty_lines
+Style/EmptyLinesAroundBlockBody:
+  Exclude:
+    - 'db/schema.rb'
+    - 'lib/tasks/unicorn.rake'
+    - 'spec/controllers/rooms_controller_spec.rb'
+    - 'spec/factories/matches.rb'
+    - 'spec/features/castings_spec.rb'
+    - 'spec/models/match_spec.rb'
+    - 'spec/models/user_spec.rb'
+
+# Offense count: 3
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+# SupportedStyles: empty_lines, no_empty_lines
+Style/EmptyLinesAroundClassBody:
+  Exclude:
+    - 'app/apis/api.rb'
+    - 'app/controllers/rooms_controller.rb'
+    - 'config/application.rb'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+Style/EmptyLiteral:
+  Exclude:
+    - 'app/controllers/rooms_controller.rb'
+
+# Offense count: 6
+# Cop supports --auto-correct.
+# Configuration parameters: AllowForAlignment, ForceEqualSignAlignment.
+Style/ExtraSpacing:
+  Exclude:
+    - 'Gemfile'
+    - 'db/schema.rb'
+    - 'spec/controllers/rooms_controller_spec.rb'
+
+# Offense count: 1
+# Configuration parameters: MinBodyLength.
+Style/GuardClause:
+  Exclude:
+    - 'app/apis/api.rb'
+
+# Offense count: 15
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles, UseHashRocketsWithSymbolValues.
+# SupportedStyles: ruby19, ruby19_no_mixed_keys, hash_rockets
+Style/HashSyntax:
+  Enabled: false
+
+# Offense count: 2
+# Cop supports --auto-correct.
+# Configuration parameters: MaxLineLength.
+Style/IfUnlessModifier:
+  Exclude:
+    - 'config/unicorn/development.rb'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles, IndentationWidth.
+# SupportedStyles: special_inside_parentheses, consistent, align_braces
+Style/IndentHash:
+  Enabled: false
+
+# Offense count: 2
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+# SupportedStyles: normal, rails
+Style/IndentationConsistency:
+  Exclude:
+    - 'app/apis/api.rb'
+
+# Offense count: 9
+# Cop supports --auto-correct.
+# Configuration parameters: Width.
+Style/IndentationWidth:
+  Exclude:
+    - 'app/apis/api.rb'
+    - 'app/models/room.rb'
+    - 'app/models/user.rb'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+# SupportedStyles: require_parentheses, require_no_parentheses, require_no_parentheses_except_multiline
+Style/MethodDefParentheses:
+  Enabled: false
+
+# Offense count: 2
+# Cop supports --auto-correct.
+Style/MultilineBlockLayout:
+  Exclude:
+    - 'spec/factories/rooms.rb'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+Style/NumericLiterals:
+  MinDigits: 15
+
+# Offense count: 1
+# Cop supports --auto-correct.
+Style/RedundantBegin:
+  Exclude:
+    - 'lib/tasks/unicorn.rake'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+# Configuration parameters: AllowMultipleReturnValues.
+Style/RedundantReturn:
+  Exclude:
+    - 'app/models/room.rb'
+
+# Offense count: 12
+# Cop supports --auto-correct.
+Style/RedundantSelf:
+  Exclude:
+    - 'app/models/match.rb'
+    - 'app/models/room.rb'
+    - 'app/models/user.rb'
+
+# Offense count: 55
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+# SupportedStyles: space, no_space
+Style/SpaceBeforeBlockBraces:
+  Enabled: false
+
+# Offense count: 4
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces, SupportedStyles.
+# SupportedStyles: space, no_space
+Style/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+# Offense count: 8
+# Cop supports --auto-correct.
+Style/SpaceInsideParens:
+  Exclude:
+    - 'app/apis/api.rb'
+    - 'app/models/match.rb'
+    - 'spec/controllers/rooms_controller_spec.rb'
+
+# Offense count: 325
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles, ConsistentQuotesInMultiline.
+# SupportedStyles: single_quotes, double_quotes
+Style/StringLiterals:
+  Enabled: false
+
+# Offense count: 34
+# Cop supports --auto-correct.
+Style/Tab:
+  Exclude:
+    - 'app/apis/api.rb'
+    - 'app/models/room.rb'
+    - 'app/models/user.rb'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+# SupportedStyles: final_newline, final_blank_line
+Style/TrailingBlankLines:
+  Exclude:
+    - 'config/initializers/config.rb'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+# Configuration parameters: SupportedStyles, WordRegex.
+# SupportedStyles: percent, brackets
+Style/WordArray:
+  EnforcedStyle: percent
+  MinSize: 4
