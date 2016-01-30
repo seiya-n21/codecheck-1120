@@ -38,5 +38,4 @@ RSpec.describe User, type: :model do
       room.male
     }.from(1).to(2)
   end
-
 end

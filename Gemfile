@@ -3,10 +3,10 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.5'
-gem 'config'                  # 定数管理
+gem 'config' # 定数管理
 gem 'sqlite3'
 # gem 'mysql2'
-gem 'haml-rails'              # htmlテンプレート
+gem 'haml-rails' # htmlテンプレート
 # gem 'sass-rails'
 # gem 'compass-rails'
 gem 'jquery-rails'            # jQury利用
@@ -41,5 +41,5 @@ group :test do
   gem "database_cleaner"
   gem "launchy"
   gem "selenium-webdriver"
-  gem "simplecov"               # カバレッジ計測
+  gem "simplecov" # カバレッジ計測
 end

@@ -30,5 +30,4 @@ RSpec.describe Match, type: :model do
   it "room_idはランダム英数字であること" do
     expect(create(:match).room_id).to match(/\w+/)
   end
-
 end

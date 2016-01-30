@@ -1,6 +1,6 @@
 class API < Grape::API
   prefix "api"
-  version 'v1', :using => :path
+  version 'v1', using: :path
 
   resource "user" do
     desc "registers window_id to User"
@@ -40,11 +40,8 @@ class API < Grape::API
     end
     get ':window_id' do
       user = User.find_by(window_id: params[:window_id], room_id: params[:room_id])
-      if user.nil?
-        return { result: false }
-      else
-        return user
-      end
+      return { result: false } if user.nil?
+      return user
     end
   end
 
@@ -57,16 +54,14 @@ class API < Grape::API
 
     put do
       user = User.find_by_id params[:user_id]
-      if user.present?
-        return { result: true } if user.update( :status => false )
-      end
+      return { result: true } if user.present? && user.update(status: false)
       return { result: false }
     end
   end
 
   resource "room_full" do
-	  desc "returns True when four member joined in the room"
     # Room Full API: http://localhost:3000/api/v1/room_full/:room_id
+    desc "returns True when four member joined in the room"
     params do
       requires :room_id, type: Integer
     end
@@ -83,5 +78,4 @@ class API < Grape::API
       end
     end
   end
-
 end

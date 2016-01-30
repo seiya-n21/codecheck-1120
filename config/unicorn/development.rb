@@ -17,20 +17,15 @@ stdout_path "#{shared_path}/log/unicorn-stdout.log"
 # before_fork do |server, worker|
 before_fork do |server|
   # マスタープロセスの接続を解除
-  if defined?(ActiveRecord::Base)
-    ActiveRecord::Base.connection.disconnect!
-  end
+  ActiveRecord::Base.connection.disconnect! if defined?(ActiveRecord::Base)
+
   # 古いマスタープロセスをKILL
   old_pid = "#{shared_path}/tmp/pids/unicorn.pid.oldbin"
-  if File.exist?(old_pid) && server.pid != old_pid
-    Process.kill("QUIT", File.read(old_pid).to_i)
-  end
+  Process.kill("QUIT", File.read(old_pid).to_i) if File.exist?(old_pid) && server.pid != old_pid
 end
 
 # after_fork do |server, worker|
 after_fork do
   # preload_app=trueの場合は必須
-  if defined?(ActiveRecord::Base)
-    ActiveRecord::Base.establish_connection
-  end
+  ActiveRecord::Base.establish_connection if defined?(ActiveRecord::Base)
 end
