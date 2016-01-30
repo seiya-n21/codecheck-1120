@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe RoomsController, type: :controller do
-
   shared_examples 'redirects to room#index' do
     it "room#indexにリダイレクトされること" do
       request
@@ -76,12 +75,11 @@ RSpec.describe RoomsController, type: :controller do
       let(:request){ post :casting, user: attributes_for(:user, name: nil) }
       it_behaves_like 'redirects to room#index'
 
-      it "user dbに新規追加されないこと"  do
+      it "user dbに新規追加されないこと" do
         expect{ request }.to change(User, :count).by(0)
       end
     end
   end
-
 
   describe "user access" do
     before :each do
@@ -113,7 +111,7 @@ RSpec.describe RoomsController, type: :controller do
 
       context "roomが満員かつroom statusが2の場合" do
         before :each do
-          ['male', 'female', 'female'].each do |gender|
+          %w(male female female).each do |gender|
             create(:user, room_id: @user.room_id, gender: gender)
           end
           request
@@ -159,17 +157,16 @@ RSpec.describe RoomsController, type: :controller do
         request
         expect(response).to redirect_to matching_path
       end
-
     end
 
     describe 'GET #matching' do
       let(:request){ get :matching }
-      before(:each){ create(:match, user_id: @user.id, vote_id: 10 ) }
+      before(:each){ create(:match, user_id: @user.id, vote_id: 10) }
       it_behaves_like 'assigns the requested user to @user'
 
       context "matchした場合(1->10, 10->1)" do
         before :each do
-          @match2 = create(:match, user_id: 10, vote_id: @user.id )
+          @match2 = create(:match, user_id: 10, vote_id: @user.id)
           request
         end
 
@@ -184,16 +181,15 @@ RSpec.describe RoomsController, type: :controller do
 
       context "matchしなかった場合" do
         context "1->10, 20->1" do
-          before(:each){ create(:match, user_id: 20, vote_id: @user.id ) }
+          before(:each){ create(:match, user_id: 20, vote_id: @user.id) }
           it_behaves_like 'redirects to room#index'
         end
 
         context "1->10, 10->99" do
-          before(:each){ create(:match, user_id: 10, vote_id: 99 ) }
+          before(:each){ create(:match, user_id: 10, vote_id: 99) }
           it_behaves_like 'redirects to room#index'
         end
       end
-
     end
 
     describe 'GET #message' do

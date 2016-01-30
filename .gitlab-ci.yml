@@ -40,10 +40,9 @@ spec:requests:
 
 rubocop:
   script:
-    - bundle exec rubocop
+    - bundle exec rubocop -D
   tags:
     - ruby
-  allow_failure: true
 
 brakeman:
   script:
