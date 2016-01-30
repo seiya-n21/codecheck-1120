@@ -31,12 +31,11 @@ class RoomsController < ApplicationController
     redirect_to action: "index" if @user.room.status == 1
     @user.room.update(status: 3)
 
-    @candidates = []
-    if @user.gender == 'male'
-      @candidates = @user.room.users.where(gender: 'female')
-    else
-      @candidates = @user.room.users.where(gender: 'male')
-    end
+    @candidates = if @user.gender == 'male'
+                    @user.room.users.where(gender: 'female')
+                  else
+                    @user.room.users.where(gender: 'male')
+                  end
   end
 
   # POST /wait

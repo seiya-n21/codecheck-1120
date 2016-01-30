@@ -43,7 +43,6 @@ rubocop:
     - bundle exec rubocop -D
   tags:
     - ruby
-  allow_failure: true
 
 brakeman:
   script:

@@ -111,7 +111,7 @@ RSpec.describe RoomsController, type: :controller do
 
       context "roomが満員かつroom statusが2の場合" do
         before :each do
-          ['male', 'female', 'female'].each do |gender|
+          %w(male female female).each do |gender|
             create(:user, room_id: @user.room_id, gender: gender)
           end
           request

@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
     self.room.male = count['male'] || 0
     self.room.female = count['female'] || 0
 
-    if self.room.status == 1 && (self.room.male + self.room.female == Settings.room.capacity * 2)
+    room_num = self.room.male + self.room.female
+    if self.room.status == 1 && (room_num == Settings.room.capacity * 2)
       self.room.status = 2
     end
 

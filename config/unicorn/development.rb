@@ -21,7 +21,9 @@ before_fork do |server|
 
   # 古いマスタープロセスをKILL
   old_pid = "#{shared_path}/tmp/pids/unicorn.pid.oldbin"
-  Process.kill("QUIT", File.read(old_pid).to_i) if File.exist?(old_pid) && server.pid != old_pid
+  if File.exist?(old_pid) && server.pid != old_pid
+    Process.kill("QUIT", File.read(old_pid).to_i)
+  end
 end
 
 # after_fork do |server, worker|

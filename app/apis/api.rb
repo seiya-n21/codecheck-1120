@@ -4,9 +4,9 @@ class API < Grape::API
 
   resource "user" do
     desc "registers window_id to User"
-    # Register window_id on User Table: http://localhost:3000/api/v1/user
+    # Register window_id on User Table: /api/v1/user
     # Try below command on your terminal. if you get result true, it must be sccuess
-    # $ curl -X PUT http://localhost:3000/api/v1/user/1 -d "window_id=test2"
+    # $ curl -X PUT /api/v1/user/1 -d "window_id=test2"
     params do
       requires :user_id, type: Integer
       requires :window_id, type: String
@@ -22,7 +22,7 @@ class API < Grape::API
 
   resource "users" do
     desc "returns users in the room"
-    # Users in the room API: http://localhost:3000/api/v1/users/:room_id
+    # Users in the room API: /api/v1/users/:room_id
     params do
       requires :room_id, type: Integer
     end
@@ -33,7 +33,7 @@ class API < Grape::API
 
   resource "window_id" do
     desc "gets User information with window_id and room_id"
-    # http://localhost:3000/api/v1/window_id/:window_id?room_id=:room_id
+    # /api/v1/window_id/:window_id?room_id=:room_id
     params do
       requires :window_id, type: String
       requires :room_id, type: Integer
@@ -47,7 +47,7 @@ class API < Grape::API
 
   resource "leaving_user" do
     desc "change to invalids status with User"
-    # $ curl -X PUT curl -X PUT http://localhost:3000/api/v1/leaving_user -d "user_id=:user_id"
+    # $ curl -X PUT curl -X PUT api/v1/leaving_user -d "user_id=:user_id"
     params do
       requires :user_id, type: String
     end
@@ -60,7 +60,7 @@ class API < Grape::API
   end
 
   resource "room_full" do
-    # Room Full API: http://localhost:3000/api/v1/room_full/:room_id
+    # Room Full API: /api/v1/room_full/:room_id
     desc "returns True when four member joined in the room"
     params do
       requires :room_id, type: Integer

@@ -1,23 +1,38 @@
-inherit_from: .rubocop_todo.yml
+# inherit_from: .rubocop_todo.yml
 
 # 自動生成されるものはチェック対象から除外する
 AllCops:
   Exclude:
-    - "vendor/**/*"
-    - "db/schema.rb"
+    - 'vendor/**/*'
+    - 'db/schema.rb'
+    - 'bin/*'
   DisplayCopNames: true
+
+# サイズ制限
+Metrics/AbcSize:
+  Max: 24
+
+# 1行のサイズ制限
+Metrics/LineLength:
+  Max: 100
 
 # 日本語のコメントを許可する
 Style/AsciiComments:
   Enabled: false
 
+# spceのみ複数行のブロックを許可する
+Style/BlockDelimiters:
+  AutoCorrect: false
+  Exclude:
+    - 'spec/**/*'
+
 # ドキュメントの無い public class を許可する
 Style/Documentation:
   Enabled: false
 
-# if 文の中はに 3 行まで
-# Style/GuardClause:
-#   MinBodyLength: 3
+# クラス変数無効に
+Style/ClassVars:
+  Enabled: false
 
 # selfの利用を許可する
 Style/RedundantSelf:
@@ -25,4 +40,8 @@ Style/RedundantSelf:
 
 # ブロックの前にスペースを入れないことを許可する => あとで修正する？
 Style/SpaceBeforeBlockBraces:
+  Enabled: false
+
+# String型でダブルクォーテーションを許可する => 数が多いのであとで修正する
+Style/StringLiterals:
   Enabled: false
