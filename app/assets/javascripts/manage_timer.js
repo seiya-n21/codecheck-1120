@@ -49,6 +49,10 @@ function display_timer(){
 //
 function count_timer(server_target_time){
   d = new Date(server_target_time);
-  logging_debug(d); ///
+  logging_debug(d); //
+  var target_time  = d.setSeconds(d.getSeconds() + 600);
+  logging_debug('target_time:  ');
+  logging_debug(target_time);
+
   setInterval("display_timer()",1000);
 }
