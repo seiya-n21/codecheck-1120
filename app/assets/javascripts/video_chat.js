@@ -50,7 +50,7 @@ function manage_mediasteam(s_roomid, s_name, s_gender, uid) {
 
   // Error handling:★ユーザに何を表示すべきか要検討
   multiparty.on('error', function(err) {
-	  alert(err);
+	  //alert(err);
 	});
 }
 
