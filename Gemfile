@@ -1,10 +1,12 @@
+# coding: utf-8
+
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.5'
-gem 'config'                  # 定数管理
+gem 'config' # 定数管理
 gem 'sqlite3'
 # gem 'mysql2'
-gem 'haml-rails'              # htmlテンプレート
+gem 'haml-rails' # htmlテンプレート
 # gem 'sass-rails'
 # gem 'compass-rails'
 gem 'jquery-rails'            # jQury利用
@@ -24,13 +26,13 @@ group :development, :test do
   gem 'pry-rails'             # pry利用
   gem 'pry-byebug'            # pryでデバッグコマンドが可能
   gem 'hirb'                  # SQLの結果を整形
-  gem 'erb2haml'              # .erbを.hamlに変換
-  gem 'rails-erd'             # モデルのER図を出力
-  gem 'rails_best_practices'  # ベストプラクティスのチェック
-
+  # gem 'erb2haml'              # .erbを.hamlに変換
+  # gem 'rails-erd'             # モデルのER図を出力
+  # gem 'rails_best_practices'  # ベストプラクティスのチェック
   gem 'rspec-rails'
-  # gem 'rspec-request_describer'
   gem 'factory_girl_rails'
+  gem 'rubocop', require: false
+  gem 'brakeman', require: false
 end
 
 group :test do
@@ -39,4 +41,5 @@ group :test do
   gem "database_cleaner"
   gem "launchy"
   gem "selenium-webdriver"
+  gem "simplecov" # カバレッジ計測
 end
