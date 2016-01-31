@@ -13,20 +13,24 @@ FactoryGirl.define do
     trait :with_users do
       after(:build) do |room|
         unless room.male.nil?
-          room.male.times { room.users << FactoryGirl.build(
-            :user,
-            room: room,
-            gender: 'male',
-            status: true
-          ) }
+          room.male.times {
+            room.users << FactoryGirl.build(
+              :user,
+              room: room,
+              gender: 'male',
+              status: true
+            )
+          }
         end
         unless room.female.nil?
-          room.female.times { room.users << FactoryGirl.build(
-            :user,
-            room: room,
-            gender: 'female',
-            status: true
-          ) }
+          room.female.times {
+            room.users << FactoryGirl.build(
+              :user,
+              room: room,
+              gender: 'female',
+              status: true
+            )
+          }
         end
       end
     end

@@ -3,5 +3,4 @@ FactoryGirl.define do
     user_id 1
     vote_id 2
   end
-
 end

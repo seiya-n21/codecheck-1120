@@ -43,14 +43,17 @@ function display_timer(){
 }
 
 //ref)http://iwb.jp/javascript-new-date-gettime/
-// TODO: 
+// TODO:
 //   1. Serverから返却された時間を基にTarget決める
 //   2. ローカル時刻とサーバ時刻から差分を補正する
 //
 function count_timer(server_target_time){
   d = new Date(server_target_time);
-  logging_debug(d); //
-  var target_time  = d.setSeconds(d.getSeconds() + 600);
+  logging_debug(d);
+  var client_date = new Date();
+  var date_diff = d - client_date;
+  logging_debug(dete_diff);
+  var target_time  = dete_diff.setSeconds(dete_diff.getSeconds() + 600);
   logging_debug('target_time:  ');
   logging_debug(target_time);
 

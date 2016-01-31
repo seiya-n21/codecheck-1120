@@ -88,7 +88,7 @@ RSpec.describe 'API', type: :request do
   end
 
   describe "PUT /api/v1/user/:user_id, :window_id" do
-    let(:request){ put "/api/v1/user/#{user_id}.json", {window_id: 'test2'} }
+    let(:request){ put "/api/v1/user/#{user_id}.json", window_id: 'test2' }
 
     context "userが存在する場合" do
       let(:user){ create(:user) }
@@ -111,7 +111,7 @@ RSpec.describe 'API', type: :request do
   end
 
   describe "PUT /api/v1/leaving_user, :window_id" do
-    let(:request){ put "/api/v1/leaving_user.json", {user_id: user_id} }
+    let(:request){ put "/api/v1/leaving_user.json", user_id: user_id }
 
     context "userが存在する場合" do
       let(:room){ create(:room, :with_users) }
