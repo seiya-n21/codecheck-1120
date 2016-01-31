@@ -7,14 +7,14 @@
         - if @user.present? and @user.errors.any?
           - @user.errors.full_messages.each do |msg|
             %p= msg
-        =form_for @user, :url => { :action => 'casting' } do |f|
+        =form_for @user, :url => { action: 'casting' } do |f|
           = f.label :name, '今すぐトークを始めよう！'
           = f.text_field :name, class: 'form-control', placeholder: 'ニックネーム', maxlength: '10'
           %span
             2文字以上10文字以内で入力してね
-          .form-group 
-            %img.radio-group{id:'male', src:'assets/male_selected.png', width:70, height:70}
-            %img.radio-group{id:'female', src:'assets/female_selected.png', width:70, height:70}
+          .form-group
+            = image_tag('male_selected.png', id: 'male', class: 'radio-group', size: '70x70')
+            = image_tag('female_selected.png', id: 'female', class: 'radio-group', size: '70x70')
             %input{name:'user[gender]', type:'hidden'}
             %br
             %br

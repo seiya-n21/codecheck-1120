@@ -6,7 +6,7 @@ ruby "2.3.0"
 gem 'rails', '4.2.5'
 gem 'config' # 定数管理
 gem 'haml-rails' # htmlテンプレート
-# gem 'sass-rails'
+gem 'sass-rails'
 # gem 'compass-rails'
 gem 'jquery-rails'            # jQury利用
 gem 'uglifier'                # JavaScriptの圧縮
@@ -26,7 +26,7 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'better_errors'         # エラー画面の改良
+  gem "better_errors"         # エラー画面の改良
   gem 'binding_of_caller'     # エラー画面にpry表示
   gem 'pry-rails'             # pry利用
   gem 'pry-byebug'            # pryでデバッグコマンドが可能
