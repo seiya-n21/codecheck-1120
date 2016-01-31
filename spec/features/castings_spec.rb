@@ -114,6 +114,11 @@ RSpec.feature "Castings", type: :feature do
        click_button 'submit'
      end
 
+     sleep 7
+     using_session :user4 do
+       fill_in "line", with: "hello!"
+       click_on "send"
+     end
      using_session :user1 do
        fill_in "line", with: "hello!"
        click_on "send"

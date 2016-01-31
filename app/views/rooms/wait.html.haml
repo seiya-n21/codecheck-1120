@@ -26,8 +26,8 @@
   setInterval(function(){
     $.ajax({
       type: "GET",
-      url: "/api/v1/vote/",
-      data: gon.user.id,
+      url: "/api/v1/vote/" + gon.user.id + '.json',
+      dataType: "json",
       success: function(res){
         console.log(res);
         if(res.result=="match"){
