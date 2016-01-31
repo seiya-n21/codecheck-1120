@@ -8,7 +8,7 @@
 //'https:'; // 本番サーバではこちらを使う
 //const TOP_URL   = URI_SCHEME + location.host + '/'; // localhost
 const TOP_URL   = '/'; // localhost
-const VOTE_URL  = '/vote/';
+const VOTE_URL  = '/vote';
 const DEBUG_FLG = gon.const.debug_flag; // true で、ログ表示
 
 //debug flgに応じてlogging
