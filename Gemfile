@@ -26,7 +26,7 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'better_errors'         # エラー画面の改良
+  gem "better_errors"         # エラー画面の改良
   gem 'binding_of_caller'     # エラー画面にpry表示
   gem 'pry-rails'             # pry利用
   gem 'pry-byebug'            # pryでデバッグコマンドが可能
@@ -38,4 +38,13 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'rubocop', require: false
   gem 'brakeman', require: false
+end
+
+group :test do
+  gem "faker"
+  gem "capybara"
+  gem "database_cleaner"
+  gem "launchy"
+  gem "selenium-webdriver"
+  gem "simplecov" # カバレッジ計測
 end
