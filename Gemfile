@@ -20,8 +20,13 @@ gem 'unicorn'
 gem 'therubyracer'
 gem "font-awesome-rails"      # Font Awesome利用
 
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
+
 group :development, :test do
-  gem "better_errors"         # エラー画面の改良
+  gem 'better_errors'         # エラー画面の改良
   gem 'binding_of_caller'     # エラー画面にpry表示
   gem 'pry-rails'             # pry利用
   gem 'pry-byebug'            # pryでデバッグコマンドが可能
