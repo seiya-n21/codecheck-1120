@@ -173,13 +173,13 @@ RSpec.describe 'API', type: :request do
     context "userが存在する場合" do
       let(:user){ create(:user) }
       let(:user_id){ user.id }
-      before(:each){ create(:match, user_id: user_id, vote_id: 10 ) }
+      before(:each){ create(:match, user_id: user_id, vote_id: 10) }
 
       it_behaves_like 'check http_status'
 
       context "matchした場合(1->10, 10->1)" do
         before :each do
-          @match2 = create(:match, user_id: 10, vote_id: user_id )
+          @match2 = create(:match, user_id: 10, vote_id: user_id)
           request
         end
 
@@ -194,7 +194,7 @@ RSpec.describe 'API', type: :request do
 
       context "unmatchの場合" do
         it "unmatchを返すこと" do
-          create(:match, user_id: 10, vote_id: 99 )
+          create(:match, user_id: 10, vote_id: 99)
           request
           expect(json['result']).to eq 'unmatch'
         end
@@ -214,5 +214,4 @@ RSpec.describe 'API', type: :request do
       it_behaves_like 'return false'
     end
   end
-
 end
