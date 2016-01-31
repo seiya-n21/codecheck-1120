@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
-  before_action :set_user, only: [:room, :vote, :wait, :matching, :message]
-  before_action :set_js_const, only: [:index, :room, :vote, :message]
+  before_action :set_user, only: [:room, :vote, :wait, :message]
+  before_action :set_js_const, only: [:index, :room, :vote, :wait, :message]
 
   # GET /
   def index
@@ -23,7 +23,6 @@ class RoomsController < ApplicationController
 
   # GET /room
   def room
-    gon.user = @user
   end
 
   # GET /vote
@@ -41,28 +40,10 @@ class RoomsController < ApplicationController
   # POST /wait
   def wait
     Match.create(user_id: @user.id, vote_id: params[:candidate])
-    sleep(Settings.match.vote_time)
-
-    redirect_to action: "matching"
-  end
-
-  # GET /matching
-  def matching
-    match1 = Match.find_by(user_id: @user.id)
-    match2 = Match.find_by(user_id: match1.vote_id, vote_id: @user.id)
-    if match2.nil?
-      # not match
-      redirect_to action: "index"
-    else
-      # match
-      @room_id = (match1.user_id > match1.vote_id) ? match1.room_id : match2.room_id
-      redirect_to action: "message", id: @room_id
-    end
   end
 
   # GET /message/:id
   def message
-    gon.user = @user
     gon.room_id = params[:id]
   end
 
@@ -70,6 +51,7 @@ class RoomsController < ApplicationController
 
   def set_user
     @user ||= User.find_by_id(session[:user_id])
+    gon.user = @user
     redirect_to action: "index" if @user.nil? || !@user.status
   end
 
