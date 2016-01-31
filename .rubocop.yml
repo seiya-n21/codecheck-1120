@@ -1,0 +1,43 @@
+# --auto-gen-config
+# inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'db/schema.rb'
+    - 'bin/*'
+    - 'spec/support/shared_db_connection.rb'
+  DisplayCopNames: true
+
+Metrics/AbcSize:
+  Max: 24
+
+Metrics/MethodLength:
+  Max: 12
+
+Metrics/LineLength:
+  Max: 100
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/BlockDelimiters:
+  AutoCorrect: false
+  Exclude:
+    - 'spec/**/*'
+
+Style/Documentation:
+  Enabled: false
+
+Style/RedundantSelf:
+  Enabled: false
+
+# ToDo
+Style/GuardClause:
+  Enabled: false
+
+Style/SpaceBeforeBlockBraces:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false

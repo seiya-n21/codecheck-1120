@@ -26,27 +26,31 @@ function proc_myms(video, s_roomid, s_name, s_gender, uid){
 
 //他人が入室したときの処理
 function peer_myms(roomid, video){
-
   // 1. get peer uinfo
   display_uinfo(video, roomid); // wid, roomid
 
   // 2. check fullroom API
-  check_fullroom(roomid); // roomid ■動的に //call display_timer();
+  check_fullroom(roomid); //call display_timer();
 }
 
 
 function manage_mediasteam(s_roomid, s_name, s_gender, uid) {
   multiparty.on('my_ms', function(video) {
-	  proc_myms(video, s_roomid, s_name, s_gender, uid); //自分入室時の処理
+    proc_myms(video, s_roomid, s_name, s_gender, uid); //自分入室時の処理
 
-	}).on('peer_ms', function(video) {
+  }).on('peer_ms', function(video) {
     peer_myms(s_roomid, video); //他人入室時の処理
-	}).on('ms_close', function(peer_id) {
-	  // TODO
 
-	  // peerが切れたら、対象のvideoノードを削除する
-	  $("#"+peer_id).remove();
-	});
+  }).on('ms_close', function(peer_id) {
+    // peerが切れたら、対象のvideoノードを削除する
+    $("#"+peer_id).remove();
+
+    // peerが切れたユーザ枠を削除
+    aUinfoNode = document.getElementById('peer-video-uinfo-'+ peer_id);
+    for (var i = aUinfoNode.childNodes.length-1; i>=0; i--) {
+      aUinfoNode.removeChild(aUinfoNode.childNodes[i]);
+    }
+  });
 
   // Error handling:★ユーザに何を表示すべきか要検討
   multiparty.on('error', function(err) {
@@ -56,42 +60,42 @@ function manage_mediasteam(s_roomid, s_name, s_gender, uid) {
 
 function manage_message(name){
   multiparty.on('message', function(mesg) {
-	  // peerからテキストメッセージを受信
-	  $("p.receive").append(mesg.data + "<br>");
-	});
+    // peerからテキストメッセージを受信
+    $("p.receive").append(mesg.data + "<br>");
+  });
 
   $("#message form").on("submit", function(ev) {
-	  ev.preventDefault();  // onsubmitのデフォルト動作（reload）を抑制
-	  // テキストデータ取得
-	  var $text = $(this).find("input[type=text]");
-	  var data = escapeHtml(($text.val()));
-	  data = name + ': ' + data;
-	  if(data.length > 0) {
+    ev.preventDefault();  // onsubmitのデフォルト動作（reload）を抑制
+    // テキストデータ取得
+    var $text = $(this).find("input[type=text]");
+    var data = escapeHtml(($text.val()));
+    data = name + ': ' + data;
+    if(data.length > 0) {
       data = data.replace(/</g, "<").replace(/>/g, ">");
-		　$("p.receive").append(data + "<br>");
-		　// メッセージを接続中のpeerに送信する
-		　multiparty.send(data);
-		　//		$text.val("");
-	  }
-	});
+      $("p.receive").append(data + "<br>");
+      // メッセージを接続中のpeerに送信する
+      ultiparty.send(data);
+      // $text.val("");
+      }
+    }
+  );
 }
 
 //先に、manage_***()の定義が必要
 function video_chat_start(s_roomid, s_name, s_gender, uid) {
-
-  var room_name = 'room' + (s_roomid).toString();
-
   //sessionStorageクリア
   clearSessionStorage();
 
-  mlt_debug = (DEBUG_FLG) ? 2 : 0;
+  var room_name = 'room' + (s_roomid).toString();
+  var mlt_debug = (DEBUG_FLG) ? 2 : 0;
+
   multiparty = new MultiParty( {
     "key": gon.const.multi_party_key,
-	  "reliable": true,
-	  "room": room_name,
+    "reliable": true,
+    "room": room_name,
     "id": 'meetalkid_' + uid, //skywayでユーザを一位に特定するid?
-	  "debug": mlt_debug
-	});
+    "debug": mlt_debug
+  });
   //manage_message(s_name); //チャットしない
   // サーバとpeerに接続
   multiparty.start();
@@ -101,10 +105,10 @@ function video_chat_start(s_roomid, s_name, s_gender, uid) {
 function message_start(s_name, s_roomid) {
   multiparty = new MultiParty( {
     "key": gon.const.multi_party_key,
-	  "reliable": true,
-	  "room_id": s_roomid,
-	  "debug": 2
-	});
+    "reliable": true,
+    "room_id": s_roomid,
+    "debug": 2
+  });
   manage_message(s_name);
   // サーバとpeerに接続
   multiparty.start();

@@ -37,3 +37,15 @@ spec:requests:
 #     - RAILS_ENV=test bundle exec rake spec:features
 #   tags:
 #     - ruby
+
+rubocop:
+  script:
+    - bundle exec rubocop -D
+  tags:
+    - ruby
+
+brakeman:
+  script:
+    - bundle exec brakeman
+  tags:
+    - ruby
