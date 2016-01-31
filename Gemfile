@@ -4,8 +4,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.5'
 gem 'config' # 定数管理
-gem 'sqlite3'
-# gem 'mysql2'
 gem 'haml-rails' # htmlテンプレート
 # gem 'sass-rails'
 # gem 'compass-rails'
@@ -26,6 +24,7 @@ group :production do
 end
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'better_errors'         # エラー画面の改良
   gem 'binding_of_caller'     # エラー画面にpry表示
   gem 'pry-rails'             # pry利用
