@@ -1,8 +1,15 @@
+require 'capybara/rspec'
+require 'headless'
+require 'selenium/webdriver'
 require 'simplecov'
 
-SimpleCov.start do
+SimpleCov.start 'rails' do
   add_filter '/vendor/'
-  add_filter '/vendor/'
+  add_filter '/spec/'
+  add_filter '/config/'
+
+  add_group 'Controllers', 'app/controllers'
+  add_group 'Models', 'app/models'
 end
 
 RSpec.configure do |config|
@@ -19,3 +26,11 @@ RSpec.configure do |config|
   config.filter_run :focus
   config.order = 'random'
 end
+
+Capybara.register_driver :selenium do |app|
+  profile = Selenium::WebDriver::Firefox::Profile.new
+  profile['media.navigator.permission.disabled'] = true
+  profile['dom.disable_beforeunload'] = true
+  Capybara::Selenium::Driver.new(app, profile: profile)
+end
+Capybara.current_driver = :selenium

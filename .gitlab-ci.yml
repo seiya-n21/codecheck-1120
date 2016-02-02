@@ -1,51 +1,75 @@
-image: ruby:2.3
+# image: ruby:2.3
+image: xkumiyu/ruby-firefox
 
-# services:
-#   - mysql:latest
+services:
+  # - mysql:latest
+  # - postgres:latest
 
 # variables:
 #   MYSQL_ALLOW_EMPTY_PASSWORD: "1"
 
 before_script:
-  - source ./scripts/prepare_build.sh
   - ruby -v
-  - which ruby
+  - cp config/secrets.yml.example config/secrets.yml
   - gem install bundler --no-ri --no-rdoc
   - bundle install --path vendor/bundle
+  # - bundle install --path vendor/bundle --without production
   - RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load db:migrate
 
+stages:
+  - test
+  - deploy
+
 spec:controllers:
+  stage: test
   script:
     - RAILS_ENV=test bundle exec rake spec:controllers
   tags:
     - ruby
 
 spec:models:
+  stage: test
   script:
     - RAILS_ENV=test bundle exec rake spec:models
   tags:
     - ruby
 
 spec:requests:
+  stage: test
   script:
     - RAILS_ENV=test bundle exec rake spec:requests
   tags:
     - ruby
 
-# spec:features:
-#   script:
-#     - RAILS_ENV=test bundle exec rake spec:features
-#   tags:
-#     - ruby
+spec:features:
+  stage: test
+  script:
+    - Xvfb :99 -screen 0 1024x768x24 &
+    # - firefox &
+    - RAILS_ENV=test bundle exec rake spec:features
+  tags:
+    - ruby
 
 rubocop:
+  stage: test
   script:
     - bundle exec rubocop -D
   tags:
     - ruby
 
 brakeman:
+  stage: test
   script:
     - bundle exec brakeman
   tags:
     - ruby
+
+# deploy:develop:
+#   stage: deploy
+#   script:
+#     - gem install dpl
+#     - dpl --provider=heroku --app=meetil-dev --api-key=74f0308d-1b82-4ebd-9cdf-4cd7017118ec
+#   only:
+#     - develop
+#   tags:
+#     - ruby

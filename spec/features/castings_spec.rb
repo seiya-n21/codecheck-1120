@@ -1,15 +1,8 @@
+# coding: utf-8
+
 require 'rails_helper'
 
 RSpec.feature "Castings", type: :feature do
-  Capybara.register_driver :selenium do |app|
-    require 'selenium/webdriver'
-    profile = Selenium::WebDriver::Firefox::Profile.new
-    profile['media.navigator.permission.disabled'] = true
-    profile['dom.disable_beforeunload'] = true
-    Capybara::Selenium::Driver.new(app, profile: profile)
-  end
-  Capybara.current_driver = :selenium
-
   scenario "start video chat", js: true do
     using_session :user1 do
       visit root_path

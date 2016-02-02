@@ -45,6 +45,7 @@ group :test do
   gem "capybara"
   gem "database_cleaner"
   gem "launchy"
+  gem 'headless'
   gem "selenium-webdriver"
   gem "simplecov" # カバレッジ計測
 end
