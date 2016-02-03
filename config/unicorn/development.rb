@@ -3,7 +3,7 @@
 application = 'meetil'
 shared_path = "/var/www/#{application}/shared"
 
-worker_processes Integer(ENV["WEB_CONCURRENCY"] || 2)
+worker_processes Integer(ENV['WEB_CONCURRENCY'] || 2)
 working_directory "/var/www/#{application}/current"
 timeout 30
 preload_app true
@@ -22,7 +22,7 @@ before_fork do |server|
   # 古いマスタープロセスをKILL
   old_pid = "#{shared_path}/tmp/pids/unicorn.pid.oldbin"
   if File.exist?(old_pid) && server.pid != old_pid
-    Process.kill("QUIT", File.read(old_pid).to_i)
+    Process.kill('QUIT', File.read(old_pid).to_i)
   end
 end
 

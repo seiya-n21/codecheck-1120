@@ -15,9 +15,9 @@ class RoomsController < ApplicationController
     @user = room.users.new(params[:user].permit(:name, :gender))
     if @user.save
       session[:user_id] = @user.id
-      redirect_to action: "room"
+      redirect_to action: 'room'
     else
-      redirect_to action: "index"
+      redirect_to action: 'index'
     end
   end
 
@@ -27,7 +27,7 @@ class RoomsController < ApplicationController
 
   # GET /vote
   def vote
-    redirect_to action: "index" if @user.room.status == 1
+    redirect_to action: 'index' if @user.room_status == 1
     @user.room.update(status: 3)
 
     @candidates = if @user.gender == 'male'
@@ -52,7 +52,7 @@ class RoomsController < ApplicationController
   def set_user
     @user ||= User.find_by_id(session[:user_id])
     gon.user = @user
-    redirect_to action: "index" if @user.nil? || !@user.status
+    redirect_to action: 'index' if @user.nil? || !@user.status
   end
 
   def set_js_const

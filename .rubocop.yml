@@ -32,12 +32,5 @@ Style/Documentation:
 Style/RedundantSelf:
   Enabled: false
 
-# ToDo
 Style/GuardClause:
-  Enabled: false
-
-Style/SpaceBeforeBlockBraces:
-  Enabled: false
-
-Style/StringLiterals:
   Enabled: false

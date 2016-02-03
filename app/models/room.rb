@@ -7,9 +7,9 @@ class Room < ActiveRecord::Base
 
   def self.casting(user_gender)
     room = if user_gender == 'male'
-             self.find_by("male < ? and status = ?", Settings.room.capacity, 1)
+             self.find_by('male < ? and status = ?', Settings.room.capacity, 1)
            else
-             self.find_by("female < ? and status = ?", Settings.room.capacity, 1)
+             self.find_by('female < ? and status = ?', Settings.room.capacity, 1)
            end
     room = self.new if room.nil?
 
