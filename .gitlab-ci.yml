@@ -42,14 +42,14 @@ spec:requests:
   tags:
     - ruby
 
-spec:features:
-  stage: test
-  script:
-    - Xvfb :99 -screen 0 1024x768x24 &
-    # - firefox &
-    - RAILS_ENV=test bundle exec rake spec:features
-  tags:
-    - ruby
+# spec:features:
+#   stage: test
+#   script:
+#     - Xvfb :99 -screen 0 1024x768x24 &
+#     # - firefox &
+#     - RAILS_ENV=test bundle exec rake spec:features
+#   tags:
+#     - ruby
 
 rubocop:
   stage: test
@@ -65,32 +65,32 @@ brakeman:
   tags:
     - ruby
 
-deploy:development:
-  stage: deploy
-  script:
-    - gem install dpl
-    - dpl --provider=heroku --app=meetil-devlopment --api-key=$HEROKU_DEBELOPMENT_API_KEY
-  only:
-    - develop
-  tags:
-    - ruby
-
-deploy:staging:
-  stage: deploy
-  script:
-    - gem install dpl
-    - dpl --provider=heroku --app=meetil-staging --api-key=$HEROKU_STAGING_API_KEY
-  only:
-    - release
-  tags:
-    - ruby
-
-deploy:production:
-  stage: deploy
-  script:
-    - gem install dpl
-    - dpl --provider=heroku --app=meetil-production --api-key=$HEROKU_PRODUCTION_API_KEY
-  only:
-    - master
-  tags:
-    - ruby
+# deploy:development:
+#   stage: deploy
+#   script:
+#     - gem install dpl
+#     - dpl --provider=heroku --app=meetil-devlopment --api-key=$HEROKU_DEBELOPMENT_API_KEY
+#   only:
+#     - develop
+#   tags:
+#     - ruby
+#
+# deploy:staging:
+#   stage: deploy
+#   script:
+#     - gem install dpl
+#     - dpl --provider=heroku --app=meetil-staging --api-key=$HEROKU_STAGING_API_KEY
+#   only:
+#     - release
+#   tags:
+#     - ruby
+#
+# deploy:production:
+#   stage: deploy
+#   script:
+#     - gem install dpl
+#     - dpl --provider=heroku --app=meetil-production --api-key=$HEROKU_PRODUCTION_API_KEY
+#   only:
+#     - master
+#   tags:
+#     - ruby
