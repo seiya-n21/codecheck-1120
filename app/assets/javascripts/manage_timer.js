@@ -1,31 +1,15 @@
 /* -----------------------------------------------------------------
- * GoCon room タイマー管理用のライブラリ
+ *  タイマー管理用のライブラリ
  *  --> connect_apiにて、満室判定ならcallされる
  * ----------------------------------------------------------------- */
 
-d = new Date();
-var target_time  = d.setSeconds(d.getSeconds() + 600);
-logging_debug('target_time:  ');
-logging_debug(target_time);
+// 再帰呼び出しで利用
+var target_time;
+var fix_time;
 
-/*
-var nowt = (new Date).getTime();
-logging_debug('now time:  ');
-logging_debug(nowt);
-var left_time = (target_time - nowt)/1000; // 1,000 ms -> 1 s
-logging_debug('left_time:  ');
-logging_debug(left_time);
-*/
-//var left_time = gon.const.video_time; //再帰呼び出しで利用するため、グローバル変数にする
-
-function display_timer(){
-   //  left_time = left_time - 1;
+function display_timer(){ //再帰呼び出し
   var now_time = (new Date).getTime();
-  logging_debug('now time:  ');
-  logging_debug(now_time);
-  var left_time = (target_time - now_time)/1000; // 1,000 ms -> 1 s
-  logging_debug('left_time:  ');
-  logging_debug(left_time);
+  var left_time = (target_time - now_time + fix_time)/1000; // 1,000 ms -> 1 s
 
   if(left_time < 0){ // 終了判定・処理
     logging_debug('ridirect to: ' + VOTE_URL);
@@ -42,20 +26,29 @@ function display_timer(){
   }
 }
 
-//ref)http://iwb.jp/javascript-new-date-gettime/
-// TODO:
-//   1. Serverから返却された時間を基にTarget決める
-//   2. ローカル時刻とサーバ時刻から差分を補正する
-//
-function count_timer(server_target_time){
+// target_time: Serverから返却された時間を基にTarget決める
+// fix_time:    ローカル時刻とサーバ時刻から差分を補正する
+function set_timer_variable(server_target_time){
+  //  var server_target_time = '05 Feb 2016 02:13:32 UTC +00:00' //debug
   d = new Date(server_target_time);
-  logging_debug(d);
-  var client_date = new Date();
-  var date_diff = d - client_date;
-  logging_debug(dete_diff);
-  var target_time  = dete_diff.setSeconds(dete_diff.getSeconds() + 600);
+  var d2 = new Date();
+  var client_time = d2.getTime();
+
+  fix_time = d.getTime() - client_time;
+  // TODO: 600は、gon.const.video_time　に置き換え
+  target_time  = d.setSeconds(d.getSeconds() + 600); 
+
+  logging_debug('server_time:  ');
+  logging_debug(d.getTime());
+  logging_debug('client_time:  ');
+  logging_debug(client_time);
+  logging_debug('fix_time:  ');
+  logging_debug(fix_time);
   logging_debug('target_time:  ');
   logging_debug(target_time);
+}
 
+function count_timer(server_target_time){//connect_apiにて、満室判定ならcallされる
+  set_timer_variable(server_target_time);
   setInterval("display_timer()",1000);
 }
