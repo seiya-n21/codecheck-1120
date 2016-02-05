@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20160110032322) do
   end
 
   add_index "matches", ["room_id"], name: "index_matches_on_room_id"
+  add_index "matches", ["user_id"], name: "index_matches_on_user_id"
 
   create_table "rooms", force: :cascade do |t|
     t.integer  "male",       default: 0, null: false

@@ -1,7 +1,7 @@
 # coding: utf-8
 
 source 'https://rubygems.org'
-ruby "2.3.0"
+ruby '2.3.0'
 
 gem 'rails', '4.2.5'
 gem 'config' # 定数管理
@@ -17,7 +17,7 @@ gem 'gon'                     # JavaScript連携
 gem 'grape'                   # Restful API
 gem 'unicorn'
 gem 'therubyracer'
-gem "font-awesome-rails"      # Font Awesome利用
+gem 'font-awesome-rails'      # Font Awesome利用
 
 group :production do
   gem 'pg'
@@ -26,7 +26,7 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-  gem "better_errors"         # エラー画面の改良
+  gem 'better_errors'         # エラー画面の改良
   gem 'binding_of_caller'     # エラー画面にpry表示
   gem 'pry-rails'             # pry利用
   gem 'pry-byebug'            # pryでデバッグコマンドが可能
@@ -41,10 +41,11 @@ group :development, :test do
 end
 
 group :test do
-  gem "faker"
-  gem "capybara"
-  gem "database_cleaner"
-  gem "launchy"
-  gem "selenium-webdriver"
-  gem "simplecov" # カバレッジ計測
+  gem 'faker'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'headless'
+  gem 'selenium-webdriver'
+  gem 'simplecov' # カバレッジ計測
 end
