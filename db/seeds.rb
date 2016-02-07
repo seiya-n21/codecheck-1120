@@ -3,4 +3,4 @@
 room = Room.create
 room.users.create(name: 'user01', gender: 'male')
 room.users.create(name: 'user02', gender: 'female')
-room.create(male: 1, female: 1)
+Room.create(male: 1, female: 1)
