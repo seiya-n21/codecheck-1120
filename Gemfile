@@ -11,7 +11,8 @@ gem 'sass-rails'
 gem 'jquery-rails'            # jQury利用
 gem 'uglifier'                # JavaScriptの圧縮
 # gem 'coffee-rails'
-gem 'twitter-bootstrap-rails'
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
 gem 'turbolinks'
 gem 'gon'                     # JavaScript連携
 gem 'grape'                   # Restful API
