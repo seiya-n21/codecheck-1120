@@ -1,7 +1,7 @@
 # image: ruby:2.3
 image: xkumiyu/ruby-firefox
 
-services:
+# services:
   # - mysql:latest
   # - postgres:latest
 
@@ -14,8 +14,13 @@ before_script:
   - ruby -v
   - cp config/secrets.yml.example config/secrets.yml
   - gem install bundler --no-ri --no-rdoc
-  - bundle install --path vendor/bundle
+  - bundle install --deployment
   - RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load db:migrate
+
+cache:
+  untracked: true
+  paths:
+    - vendor/bundle
 
 stages:
   - test

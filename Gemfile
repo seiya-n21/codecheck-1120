@@ -20,6 +20,8 @@ gem 'unicorn'
 gem 'therubyracer'
 gem 'font-awesome-rails'      # Font Awesome利用
 
+gem 'spring'
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'
@@ -39,6 +41,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'rubocop', require: false
   gem 'brakeman', require: false
+  gem 'spring-commands-rspec'
 end
 
 group :test do
