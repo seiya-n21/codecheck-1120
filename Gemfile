@@ -1,27 +1,33 @@
 # coding: utf-8
 
 source 'https://rubygems.org'
+ruby '2.3.0'
 
 gem 'rails', '4.2.5'
 gem 'config' # 定数管理
-gem 'sqlite3'
-# gem 'mysql2'
 gem 'haml-rails' # htmlテンプレート
-# gem 'sass-rails'
+gem 'sass-rails'
 # gem 'compass-rails'
 gem 'jquery-rails'            # jQury利用
 gem 'uglifier'                # JavaScriptの圧縮
 # gem 'coffee-rails'
-gem 'twitter-bootstrap-rails'
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
 gem 'turbolinks'
 gem 'gon'                     # JavaScript連携
 gem 'grape'                   # Restful API
 gem 'unicorn'
 gem 'therubyracer'
-gem "font-awesome-rails"      # Font Awesome利用
+gem 'font-awesome-rails'      # Font Awesome利用
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
 
 group :development, :test do
-  gem "better_errors"         # エラー画面の改良
+  gem 'sqlite3'
+  gem 'better_errors'         # エラー画面の改良
   gem 'binding_of_caller'     # エラー画面にpry表示
   gem 'pry-rails'             # pry利用
   gem 'pry-byebug'            # pryでデバッグコマンドが可能
@@ -36,10 +42,11 @@ group :development, :test do
 end
 
 group :test do
-  gem "faker"
-  gem "capybara"
-  gem "database_cleaner"
-  gem "launchy"
-  gem "selenium-webdriver"
-  gem "simplecov" # カバレッジ計測
+  gem 'faker'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'headless'
+  gem 'selenium-webdriver'
+  gem 'simplecov' # カバレッジ計測
 end
