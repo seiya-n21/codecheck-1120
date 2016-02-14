@@ -71,7 +71,7 @@ develop:
   stage: deploy
   script:
     - gem install dpl
-    - dpl --provider=heroku --app=meetil-dev --api-key=$HEROKU_API_KEY --migrate=`rake db:migrate`
+    - dpl --provider=heroku --app=meetil-dev --api-key=$HEROKU_API_KEY
   only:
     - develop
   tags:
@@ -81,7 +81,7 @@ staging:
   stage: deploy
   script:
     - gem install dpl
-    - dpl --provider=heroku --app=meetil-staging --api-key=$HEROKU_API_KEY --migrate=`rake db:migrate`
+    - dpl --provider=heroku --app=meetil-staging --api-key=$HEROKU_API_KEY
   only:
     - /^release\/.*$/
     - /^hotfix\/.*$/
@@ -92,7 +92,7 @@ production:
   stage: deploy
   script:
     - gem install dpl
-    - dpl --provider=heroku --app=meetil-prod --api-key=$HEROKU_API_KEY --migrate=`rake db:migrate`
+    - dpl --provider=heroku --app=meetil-prod --api-key=$HEROKU_API_KEY
   only:
     - master
   tags:
