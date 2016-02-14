@@ -67,7 +67,7 @@ brakeman:
   tags:
     - ruby
 
-deploy:develop:
+develop:
   stage: deploy
   script:
     - gem install dpl
@@ -77,17 +77,18 @@ deploy:develop:
   tags:
     - ruby
 
-deploy:staging:
+staging:
   stage: deploy
   script:
     - gem install dpl
     - dpl --provider=heroku --app=meetil-staging --api-key=$HEROKU_API_KEY
   only:
     - /^release\/.*$/
+    - /^hotfix\/.*$/
   tags:
     - ruby
 
-deploy:production:
+production:
   stage: deploy
   script:
     - gem install dpl
