@@ -92,12 +92,12 @@ view.onChangeAudio = function(){
       console.log("ミュート");
       $("input[name='audio_change']").attr({id: 'audio_off'});
       document.audio_change_form.audio_on.checked = 0;
-      $(this).attr("src", "assets/mute.png");
+      $(this).attr("src", "<%= asset_path 'mute.png' %>");
     }else if($("input[name='audio_change']").attr("id")=="audio_off"){
       console.log("録音中…");
       $("input[name='audio_change']").attr({id: 'audio_on'});
       document.audio_change_form.audio_on.checked = 1;
-      $(this).attr("src", "assets/voice.png");
+      $(this).attr("src", "<%= asset_path 'voice.png' %>");
     }
   onAudioChange();
   });
@@ -113,12 +113,12 @@ view.onChangeVideo = function(){
       console.log("カメラoff");
       $("input[name='video_change']").attr({id:'video_off'});
       document.video_change_form.video_on.checked = 0;
-      $(this).attr("src", "assets/cam_off.png");
+      $(this).attr("src", "<%= asset_path 'cam_off.png' %>");
     }else if($("input[name='video_change']").attr("id")=="video_off"){
       console.log("カメラon");
       $("input[name='video_change']").attr({id:'video_on'});
       document.video_change_form.video_on.checked = 1;
-      $(this).attr("src", "assets/cam.png");
+      $(this).attr("src", "<%= asset_path 'cam.png' %>");
     }
   onVideoChange();
   });
