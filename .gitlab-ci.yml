@@ -1,4 +1,3 @@
-# image: ruby:2.3
 image: xkumiyu/ruby-firefox
 
 # services:
@@ -6,9 +5,7 @@ image: xkumiyu/ruby-firefox
   # - postgres:latest
 
 variables:
-  HEROKU_DEBELOPMENT_API_KEY: 74f0308d-1b82-4ebd-9cdf-4cd7017118ec
-  HEROKU_STAGING_API_KEY: 74f0308d-1b82-4ebd-9cdf-4cd7017118ec
-  HEROKU_PRODUCTION_API_KEY: 74f0308d-1b82-4ebd-9cdf-4cd7017118ec
+  HEROKU_API_KEY: 74f0308d-1b82-4ebd-9cdf-4cd7017118ec
 
 before_script:
   - ruby -v
@@ -70,32 +67,32 @@ brakeman:
   tags:
     - ruby
 
-# deploy:development:
-#   stage: deploy
-#   script:
-#     - gem install dpl
-#     - dpl --provider=heroku --app=meetil-devlopment --api-key=$HEROKU_DEBELOPMENT_API_KEY
-#   only:
-#     - develop
-#   tags:
-#     - ruby
-#
-# deploy:staging:
-#   stage: deploy
-#   script:
-#     - gem install dpl
-#     - dpl --provider=heroku --app=meetil-staging --api-key=$HEROKU_STAGING_API_KEY
-#   only:
-#     - release
-#   tags:
-#     - ruby
-#
-# deploy:production:
-#   stage: deploy
-#   script:
-#     - gem install dpl
-#     - dpl --provider=heroku --app=meetil-production --api-key=$HEROKU_PRODUCTION_API_KEY
-#   only:
-#     - master
-#   tags:
-#     - ruby
+deploy:develop:
+  stage: deploy
+  script:
+    - gem install dpl
+    - dpl --provider=heroku --app=meetil-dev --api-key=$HEROKU_API_KEY
+  only:
+    - develop
+  tags:
+    - ruby
+
+deploy:staging:
+  stage: deploy
+  script:
+    - gem install dpl
+    - dpl --provider=heroku --app=meetil-staging --api-key=$HEROKU_API_KEY
+  only:
+    - /^release\/.*$/
+  tags:
+    - ruby
+
+deploy:production:
+  stage: deploy
+  script:
+    - gem install dpl
+    - dpl --provider=heroku --app=meetil-prod --api-key=$HEROKU_API_KEY
+  only:
+    - master
+  tags:
+    - ruby
