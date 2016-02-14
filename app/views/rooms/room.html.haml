@@ -1,0 +1,51 @@
+.casting-background-image
+.container
+  .row
+    .col-sm-8.col-sm-offset-2
+      #room_timer
+        4人集まるまで待ってね
+    .col-sm-1.col-sm-offset-1
+      #exit_button
+        %button.btn.btn-info{:type => "submit", :onclick => "exit_video_chat()"}
+          .fa.fa-sign-out
+          #exit_text
+            Exit
+
+  .row
+    .col-sm-8
+      .row
+        .col-sm-5.col-sm-offset-1
+          #streams-male
+        .col-sm-5.col-sm-offset-1
+          #streams-female
+    .col-sm-2.col-sm-offset-1
+      #video_change_button.form-group
+        = label_tag :video_change, '映像ON/OFF', class: 'label-video-change'
+        %form{:name => "video_change_form"}
+          = image_tag('cam.png', id: 'camera-icon', class: 'av-control')
+          %input{:type => 'hidden', :name => 'video_change', :id => "video_on", :checked => true}
+      #audio_change_button.form-group
+        = label_tag :audio_change, '音声ON/OFF', class: 'label-audio-change'
+        %form{:name => "audio_change_form"}
+          = image_tag('voice.png', id: 'voice-icon', class: 'av-control')
+          %input{:type => 'hidden', :name => 'audio_change', :id => "audio_on", :checked => true}
+
+
+:javascript
+  $(function(){
+    //ビデオオプション機能追加
+    view.onChangeVideo();
+    view.onChangeAudio();
+
+    //var multyparty;
+    logging_debug('user info');
+    logging_debug(gon.user);
+    // XSS対策のため、ユーザ入力値はescapeすること
+    video_chat_start(gon.user.room_id, escapeHtml(gon.user.name), gon.user.gender, gon.user.id);
+
+    $(window).on("beforeunload", function(e) {
+    　　// 切断したユーザのステータスをfalseにするAPIをリクエスト
+        delete_user(gon.user.id);
+        return "トークが終了します。";
+      });
+  });

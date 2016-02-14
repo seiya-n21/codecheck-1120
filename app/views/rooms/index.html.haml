@@ -1,0 +1,27 @@
+.login-background-image
+.logo
+.row.vertical-offset.panel-animate
+  .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
+    .panel.panel-default
+      .panel-body.text-center
+        - if @user.present? and @user.errors.any?
+          - @user.errors.full_messages.each do |msg|
+            %p= msg
+        =form_for @user, :url => { action: 'casting' } do |f|
+          = f.label :name, '今すぐトークを始めよう！'
+          = f.text_field :name, class: 'form-control', placeholder: 'ニックネーム', maxlength: '10'
+          %span
+            2文字以上10文字以内で入力してね
+          .form-group
+            = image_tag('male_selected.png', id: 'male', class: 'radio-group', size: '70x70')
+            = image_tag('female_selected.png', id: 'female', class: 'radio-group', size: '70x70')
+            %input{name:'user[gender]', type:'hidden'}
+            %br
+            %br
+            = f.submit "CAST NOW", id: 'submit', class: 'btn btn-lg btn-success btn-block'
+:javascript
+    $(function(){
+      view.animatePanel();
+      view.checkForm();
+      view.makeRadioBtn();
+    });

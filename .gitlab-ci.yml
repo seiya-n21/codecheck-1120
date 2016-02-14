@@ -1,0 +1,98 @@
+image: xkumiyu/ruby-firefox
+
+# services:
+  # - mysql:latest
+  # - postgres:latest
+
+variables:
+  HEROKU_API_KEY: 74f0308d-1b82-4ebd-9cdf-4cd7017118ec
+
+before_script:
+  - ruby -v
+  - cp config/secrets.yml.example config/secrets.yml
+  - gem install bundler --no-ri --no-rdoc
+  - bundle install --deployment
+  - RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load db:migrate
+
+cache:
+  untracked: true
+  paths:
+    - vendor/bundle
+
+stages:
+  - test
+  - deploy
+
+spec:controllers:
+  stage: test
+  script:
+    - RAILS_ENV=test bundle exec rake spec:controllers
+  tags:
+    - ruby
+
+spec:models:
+  stage: test
+  script:
+    - RAILS_ENV=test bundle exec rake spec:models
+  tags:
+    - ruby
+
+spec:requests:
+  stage: test
+  script:
+    - RAILS_ENV=test bundle exec rake spec:requests
+  tags:
+    - ruby
+
+# spec:features:
+#   stage: test
+#   script:
+#     - Xvfb :99 -screen 0 1024x768x24 &
+#     # - firefox &
+#     - RAILS_ENV=test bundle exec rake spec:features
+#   tags:
+#     - ruby
+
+rubocop:
+  stage: test
+  script:
+    - bundle exec rubocop -D
+  tags:
+    - ruby
+
+brakeman:
+  stage: test
+  script:
+    - bundle exec brakeman
+  tags:
+    - ruby
+
+deploy:develop:
+  stage: deploy
+  script:
+    - gem install dpl
+    - dpl --provider=heroku --app=meetil-dev --api-key=$HEROKU_API_KEY
+  only:
+    - develop
+  tags:
+    - ruby
+
+deploy:staging:
+  stage: deploy
+  script:
+    - gem install dpl
+    - dpl --provider=heroku --app=meetil-staging --api-key=$HEROKU_API_KEY
+  only:
+    - /^release\/.*$/
+  tags:
+    - ruby
+
+deploy:production:
+  stage: deploy
+  script:
+    - gem install dpl
+    - dpl --provider=heroku --app=meetil-prod --api-key=$HEROKU_API_KEY
+  only:
+    - master
+  tags:
+    - ruby

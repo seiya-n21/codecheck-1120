@@ -1,0 +1,49 @@
+.casting-background-image
+.container
+  .row
+    .col-sm-2.col-sm-offset-10
+      #wait_text
+        ただいま集計中…
+      %span.loading
+        %span
+        %span
+
+:javascript
+  console.log("ユーザーID：" + gon.user.id);
+
+  //-----------------------------------
+  // 最大滞在時間後の遷移
+  //-----------------------------------
+  setTimeout(function(){
+    //アンマッチ表示
+    console.log("timeout_unmatch");
+    location.href = "/"
+  }, gon.const.voting_max);
+
+  //-----------------------------------
+  // 現在の状態取得ポーリング
+  //-----------------------------------
+  setInterval(function(){
+    $.ajax({
+      type: "GET",
+      url: "/api/v1/vote/" + gon.user.id + '.json',
+      dataType: "json",
+      success: function(res){
+        console.log(res);
+        if(res.result=="match"){
+          if(res.room_id){
+            console.log("match");
+            location.href = "/message/"+res.room_id;
+          }
+        }else if(res.result=="unmatch"){
+            console.log("unmatch");
+            location.href = "/"
+        }else if(res.result=="wait"){
+            console.log("wait");
+        }
+      },
+      error: function(e){
+        console.log(e);
+      }
+    });
+  }, gon.const.voting_interval);
