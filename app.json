@@ -1,0 +1,16 @@
+{
+  "name": "Heroku Deploy",
+  "description": "Deploy your service to Heroku",
+  "keywords": [
+    "codecheck",
+    "challenge"
+  ],
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs"
+    }
+  ]
+}
